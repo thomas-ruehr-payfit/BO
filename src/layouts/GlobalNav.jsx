@@ -48,8 +48,8 @@ function NavItem({ item, active, expanded, onClick }) {
         'flex items-center gap-3 w-full rounded px-2 py-2',
         'transition-colors duration-fast text-left',
         active
-          ? 'bg-accent-subtle text-text-primary'
-          : 'text-text-secondary hover:bg-surface-warm hover:text-text-primary',
+          ? 'bg-black/[0.07] text-text-primary'
+          : 'text-text-secondary hover:bg-black/[0.04] hover:text-text-primary',
       )}
     >
       <Icon size={16} className="shrink-0" />
@@ -117,8 +117,8 @@ function CompanySearch({ expanded, onExpand, onNavigate }) {
             onFocus={() => query && setOpen(true)}
             placeholder="Search companies…"
             className={cn(
-              'w-full pl-6 pr-2 py-1.5 rounded text-caption bg-surface-1',
-              'border border-transparent focus:border-border-strong focus:outline-none',
+              'w-full pl-6 pr-2 py-1.5 rounded text-caption bg-black/[0.04]',
+              'border border-transparent focus:border-black/20 focus:outline-none',
               'text-text-primary placeholder:text-text-tertiary',
               'transition-colors duration-fast',
             )}
@@ -129,7 +129,7 @@ function CompanySearch({ expanded, onExpand, onNavigate }) {
         <button
           type="button"
           onClick={handleIconClick}
-          className="flex items-center justify-center w-8 h-8 rounded text-text-tertiary hover:bg-surface-warm hover:text-text-primary transition-colors duration-fast"
+          className="flex items-center justify-center w-8 h-8 rounded text-text-tertiary hover:bg-black/[0.04] hover:text-text-primary transition-colors duration-fast"
           aria-label="Search companies"
         >
           <Search size={15} />
@@ -138,14 +138,14 @@ function CompanySearch({ expanded, onExpand, onNavigate }) {
 
       {/* Results dropdown */}
       {open && results.length > 0 && (
-        <div className="absolute left-2 right-2 top-full mt-1 z-50 bg-surface-0 border border-border rounded-md shadow-md overflow-hidden">
+        <div className="absolute left-2 right-2 top-full mt-1 z-50 bg-surface-warm border border-black/10 rounded-md shadow-md overflow-hidden">
           {results.map((company) => (
             <button
               key={company.id}
               type="button"
               onMouseDown={(e) => e.preventDefault()} // prevent blur before click
               onClick={() => handleSelect(company)}
-              className="flex flex-col w-full px-3 py-2 text-left hover:bg-surface-1 transition-colors duration-fast"
+              className="flex flex-col w-full px-3 py-2 text-left hover:bg-black/[0.04] transition-colors duration-fast"
             >
               <span className="text-caption font-medium text-text-primary truncate">{company.name}</span>
               <span className="text-label font-mono text-text-tertiary">{company.siret}</span>
@@ -168,29 +168,41 @@ export default function GlobalNav() {
   return (
     <nav
       className={cn(
-        'flex flex-col shrink-0 bg-surface-0',
+        'flex flex-col shrink-0 bg-surface-warm',
         'transition-[width] duration-base overflow-hidden',
         expanded ? 'w-44' : 'w-12',
       )}
     >
-      {/* Org avatar */}
-      <div className="px-2 py-3 shrink-0">
-        <div className="flex items-center justify-center h-8 w-8 rounded bg-surface-3 text-label font-semibold text-text-secondary">
+      {/* Org avatar + collapse toggle (when expanded) */}
+      <div className="flex items-center justify-between px-2 py-3 shrink-0">
+        <div className="flex items-center justify-center h-8 w-8 rounded bg-black/[0.07] text-label font-semibold text-text-secondary shrink-0">
           F
         </div>
+        {expanded && (
+          <button
+            type="button"
+            onClick={() => setExpanded(false)}
+            className="flex items-center justify-center h-8 w-8 rounded text-text-tertiary hover:text-text-primary hover:bg-black/[0.04] transition-colors duration-fast"
+            aria-label="Collapse nav"
+          >
+            <PanelLeft size={14} />
+          </button>
+        )}
       </div>
 
-      <Separator />
+      <Separator className="bg-black/[0.08]" />
 
-      {/* Expand / collapse toggle */}
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        className="flex items-center justify-center h-9 shrink-0 text-text-tertiary hover:text-text-primary hover:bg-surface-warm transition-colors duration-fast"
-        aria-label={expanded ? 'Collapse nav' : 'Expand nav'}
-      >
-        <PanelLeft size={14} />
-      </button>
+      {/* Expand toggle — only shown when collapsed */}
+      {!expanded && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="flex items-center justify-center h-9 shrink-0 text-text-tertiary hover:text-text-primary hover:bg-black/[0.04] transition-colors duration-fast"
+          aria-label="Expand nav"
+        >
+          <PanelLeft size={14} />
+        </button>
+      )}
 
       {/* Search + Companies */}
       <div className="flex flex-col gap-0.5 px-0 py-2 shrink-0">
@@ -211,7 +223,7 @@ export default function GlobalNav() {
         ))}
       </div>
 
-      <Separator />
+      <Separator className="bg-black/[0.08]" />
 
       {/* Middle — Declarations / Documents / Billing */}
       <div className="flex-1 flex flex-col justify-center gap-0.5 px-2 py-2 overflow-hidden">
@@ -226,7 +238,7 @@ export default function GlobalNav() {
         ))}
       </div>
 
-      <Separator />
+      <Separator className="bg-black/[0.08]" />
 
       {/* Bottom — Timeline / Settings / Account */}
       <div className="flex flex-col gap-0.5 px-2 py-2 shrink-0">
