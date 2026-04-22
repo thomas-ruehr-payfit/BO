@@ -11,8 +11,8 @@ import { useCopyable } from '@/hooks/useCopyable'
  *   faded      — de-emphasized color for value
  *   encrypted  — shows "[Encrypted]" instead of value, non-copyable
  */
-export default function MetaRow({ label, value, faded, encrypted }) {
-  const copyable = !encrypted && Boolean(value)
+export default function MetaRow({ label, value, faded, encrypted, badgeVariant }) {
+  const copyable = !encrypted && !badgeVariant && Boolean(value)
   const { hovered, setHovered, copied, handleClick } = useCopyable(copyable ? value : null)
 
   return (
@@ -33,17 +33,27 @@ export default function MetaRow({ label, value, faded, encrypted }) {
       >
         <span className="text-caption text-text-tertiary shrink-0">{label}</span>
         <TooltipTrigger asChild>
-          <span
-            className={cn(
-              'text-caption text-right truncate',
-              encrypted && 'text-text-tertiary italic',
-              faded && !encrypted && 'text-text-tertiary',
-              !faded && !encrypted && 'text-text-primary',
-              hovered && copyable && 'underline decoration-dashed underline-offset-2',
-            )}
-          >
-            {encrypted ? '[Encrypted]' : value}
-          </span>
+          {badgeVariant ? (
+            <span
+              className={cn(
+                'text-label px-1.5 py-0.5 rounded',
+                badgeVariant === 'active' && 'bg-status-active/10 text-status-active',
+              )}
+            >
+              {value}
+            </span>
+          ) : (
+            <span
+              className={cn(
+                'text-caption text-right break-words',
+                encrypted && 'italic',
+                'text-text-primary',
+                hovered && copyable && 'underline decoration-dashed underline-offset-2',
+              )}
+            >
+              {encrypted ? '[Encrypted]' : value}
+            </span>
+          )}
         </TooltipTrigger>
       </div>
       {copied && (

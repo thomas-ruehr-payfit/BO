@@ -287,8 +287,9 @@ export const DRAWER_SECTIONS = [
     id: 'urssaf',
     title: 'Urssaf',
     defaultOpen: false,
-    badge: { label: 'Enabled', variant: 'active' },
+    badge: null,
     rows: [
+      { label: 'Status',      value: 'Enabled', badgeVariant: 'active' },
       { label: 'Method',      value: 'SEPA direct debit' },
       { label: 'Limit date',  value: '15th of month' },
       { label: 'Periodicity', value: 'Monthly' },

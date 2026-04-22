@@ -11,7 +11,7 @@ export default function SubTabBar({ currentPage, companyId }) {
 
   return (
     <div
-      className="flex items-stretch gap-1 border-b border-border bg-surface-0 px-4 shrink-0"
+      className="flex items-center gap-1 bg-surface-0 px-10 shrink-0 mt-3"
       style={{ height: 36 }}
     >
       {tabs.map((tab) => (
@@ -20,11 +20,10 @@ export default function SubTabBar({ currentPage, companyId }) {
           type="button"
           onClick={() => navigate(`/companies/${companyId}/${currentPage}/${tab.id}`)}
           className={cn(
-            'relative flex items-center px-3 text-caption transition-colors duration-fast',
-            'border-b-2 -mb-px',
+            'flex items-center px-3 py-1 rounded-md text-body-sm transition-colors duration-fast',
             sub === tab.id
-              ? 'text-text-primary font-medium border-accent'
-              : 'text-text-tertiary font-normal border-transparent hover:text-text-secondary',
+              ? 'bg-surface-2 text-text-primary font-medium'
+              : 'text-text-primary font-normal hover:bg-surface-1',
           )}
         >
           {tab.label}

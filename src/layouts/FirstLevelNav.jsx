@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { PRIMARY_NAV, DEFAULT_SUBS, PAGES_WITH_SUBS } from '@/lib/constants'
 
@@ -15,18 +14,17 @@ export default function FirstLevelNav({ currentPage, companyId }) {
 
   return (
     <div
-      className="flex items-stretch border-b border-border bg-surface-0 shrink-0 px-4"
-      style={{ height: 40 }}
+      className="flex items-end border-b border-surface-3 bg-surface-0 shrink-0 px-10 mt-3 pb-3"
+      style={{ height: 56 }}
     >
-      <div className="flex items-stretch gap-1">
+      <div className="flex items-center gap-1">
         {primary.map((item) => (
           <NavTab key={item.id} item={item} active={currentPage === item.id} onNavigate={handleNavigate} />
         ))}
       </div>
       <div className="flex-1" />
-      <div className="flex items-stretch gap-1">
-        {secondary.length > 0 && <Separator orientation="vertical" className="self-center h-4 mr-2" />}
-        {secondary.map((item) => (
+      <div className="flex items-center gap-1">
+{secondary.map((item) => (
           <NavTab key={item.id} item={item} active={currentPage === item.id} onNavigate={handleNavigate} />
         ))}
       </div>
@@ -35,18 +33,20 @@ export default function FirstLevelNav({ currentPage, companyId }) {
 }
 
 function NavTab({ item, active, onNavigate }) {
+  const Icon = item.icon
   return (
     <button
       type="button"
       onClick={() => onNavigate(item.id)}
       className={cn(
-        'relative flex items-center px-3 text-body-sm transition-colors duration-fast',
-        'border-b-2 -mb-px',
+        'flex items-center gap-2 rounded-full text-[17px] transition-colors duration-fast',
+        item.label ? 'px-5 py-1.5' : 'p-2',
         active
-          ? 'text-text-primary font-semibold border-accent'
-          : 'text-text-secondary font-normal border-transparent hover:text-text-primary',
+          ? 'bg-surface-2 text-text-primary font-semibold'
+          : 'text-text-primary font-normal hover:bg-surface-1',
       )}
     >
+      {Icon && <Icon size={16} className="shrink-0" />}
       {item.label}
     </button>
   )

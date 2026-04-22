@@ -1,4 +1,4 @@
-import { Calendar } from 'lucide-react'
+import { Calendar, TriangleAlert } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useCopyable } from '@/hooks/useCopyable'
@@ -17,7 +17,7 @@ export default function TopBarChip({ label, value, fullValue, warn, dim, mono, s
         onMouseLeave={copyable ? () => setHovered(false) : undefined}
         onKeyDown={copyable ? (e) => e.key === 'Enter' && handleClick() : undefined}
         className={cn(
-          'inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded border',
+          'inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded border overflow-hidden',
           'transition-colors duration-fast shrink-0',
           copyable ? 'cursor-pointer' : 'cursor-default',
           statusDot && 'bg-status-active/10 border-transparent',
@@ -60,8 +60,14 @@ export default function TopBarChip({ label, value, fullValue, warn, dim, mono, s
           </span>
         </TooltipTrigger>
         {suffix && (
-          <span className="text-label font-semibold text-white bg-feedback-warn rounded px-1 py-0.5 pb-[3px] leading-none">
-            {suffix}
+          <span className="self-stretch flex items-stretch -my-0.5 -mr-1.5">
+            <span className="flex items-center py-1 bg-feedback-warn-subtle">
+              <span className="w-px h-full bg-feedback-warn/25" />
+            </span>
+            <span className="flex items-center gap-1 px-2 bg-white">
+              <TriangleAlert size={11} strokeWidth={2.5} className="text-feedback-warn shrink-0" />
+              <span className="text-label font-semibold text-feedback-warn leading-none">{suffix}</span>
+            </span>
           </span>
         )}
       </div>

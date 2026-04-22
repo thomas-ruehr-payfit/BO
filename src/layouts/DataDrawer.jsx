@@ -8,24 +8,25 @@ export default function DataDrawer({ open, onToggle }) {
   return (
     <aside
       className={cn(
-        'flex flex-col shrink-0 bg-surface-warm',
-        open && 'border-r border-border',
+        'flex flex-col shrink-0 bg-surface-warm border-r border-[#d8d2c7]',
         'transition-[width] duration-base overflow-hidden',
-        open ? 'w-60' : 'w-8',
+        open ? 'w-60' : 'w-10',
       )}
     >
       {/* Toggle button */}
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex items-center justify-center h-10 shrink-0 text-text-tertiary hover:text-text-primary hover:bg-canvas transition-colors duration-fast"
-        aria-label={open ? 'Collapse drawer' : 'Expand drawer'}
-      >
+      <div className="flex items-center h-10 shrink-0">
         {open && (
           <span className="flex-1 text-left px-3 text-label uppercase tracking-wide text-text-tertiary">Company info</span>
         )}
-        <PanelRight size={14} className={cn(open ? 'mr-3' : '')} />
-      </button>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="flex items-center justify-center m-1.5 p-1.5 rounded text-text-tertiary hover:text-text-primary hover:bg-canvas transition-colors duration-fast"
+          aria-label={open ? 'Collapse drawer' : 'Expand drawer'}
+        >
+          <PanelRight size={14} />
+        </button>
+      </div>
 
       {/* Sections — only visible when expanded */}
       {open && (

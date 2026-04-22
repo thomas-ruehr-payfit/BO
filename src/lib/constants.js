@@ -1,11 +1,13 @@
+import { Users, FileText, Folder, CalendarDays, Settings } from 'lucide-react'
+
 // Primary navigation items
 // group: 'primary' = left cluster | group: 'secondary' = right cluster (divider + right-aligned)
 export const PRIMARY_NAV = [
-  { id: 'people',           label: 'People',           group: 'primary' },
-  { id: 'declaration',      label: 'Declaration',      group: 'primary' },
-  { id: 'files',            label: 'Files',            group: 'primary' },
-  { id: 'timeline',         label: 'Timeline',         group: 'secondary' },
-  { id: 'advanced-actions', label: 'Advanced Actions', group: 'secondary' },
+  { id: 'people',           label: 'People',      icon: Users,        group: 'primary' },
+  { id: 'declaration',      label: 'Declaration', icon: FileText,     group: 'primary' },
+  { id: 'files',            label: 'Files',       icon: Folder,       group: 'primary' },
+  { id: 'timeline',         label: 'Timeline',    icon: CalendarDays, group: 'secondary' },
+  { id: 'advanced-actions', icon: Settings,                           group: 'secondary' },
 ]
 
 // Sub-tab definitions per primary page
