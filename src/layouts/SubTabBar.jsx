@@ -11,7 +11,7 @@ export default function SubTabBar({ currentPage, companyId }) {
 
   return (
     <div
-      className="flex items-stretch gap-1 border-b border-border bg-surface-1 px-4 shrink-0"
+      className="flex items-stretch gap-1 border-b border-border bg-surface-0 px-4 shrink-0"
       style={{ height: 36 }}
     >
       {tabs.map((tab) => (

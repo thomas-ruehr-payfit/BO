@@ -5,12 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Canvas — warm cream page background
+        canvas: '#F1ECE1',
         // Surface layers — differentiated by subtle value shifts
         surface: {
           0: '#ffffff',
           1: '#f7f7f8',
           2: '#f0f0f2',
           3: '#e8e8eb',
+          warm: '#FFFAF0',
         },
         // Borders
         border: {
@@ -25,8 +28,9 @@ export default {
         },
         // Single accent — used intentionally
         accent: {
-          DEFAULT: '#2563eb',
-          subtle:  '#eff4ff',
+          DEFAULT:    '#ea580c',
+          subtle:     '#fff7ed',
+          foreground: '#ffffff',
         },
         // Semantic — status indicators
         status: {

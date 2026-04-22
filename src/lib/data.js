@@ -255,14 +255,15 @@ export const COMPANIES = [
 // Status chips for CompanyTopBar
 // dividerAfter: true → render a vertical separator after this chip
 export const STATUS_CHIPS = [
-  { label: 'Cycle',     value: 'Mar 26 (125)', fullValue: null,                                       accent: true },
-  { label: 'Status',    value: 'Active',        fullValue: null,                                       accent: true },
+  { label: 'Cycle',     value: 'Mar 26 · 125', fullValue: null, warn: true, badge: true, calendarIcon: true, suffix: '+30 days' },
+  { label: 'Status',    value: 'Active',        fullValue: null, statusDot: true, badge: true },
+  { label: null,        value: 'Operational',   fullValue: null, badge: true },
   { label: 'Plan',      value: 'RH+',           fullValue: null },
-  { label: 'Employees', value: '7',             fullValue: null,  dividerAfter: true },
-  { label: 'Usage',     value: 'Client',        fullValue: null,  dim: true },
-  { label: 'Origin',    value: 'Migration',     fullValue: null,  dim: true, dividerAfter: true },
-  { label: 'CL ID',     value: 'af35b7de-4f1c…', fullValue: 'af35b7de-4f1c-51ef-bc88-1282797490bd', mono: true },
-  { label: 'JL ID',     value: '56c72b558d…',    fullValue: '56c72b558dc34f0100ba8707',               mono: true },
+  { label: 'Employees', value: '7',             fullValue: null },
+  { label: 'Usage',     value: 'Client',        fullValue: null, dim: true },
+  { label: 'Origin',    value: 'Migration',     fullValue: null, dim: true },
+  { label: 'CL ID',     value: 'af35b7de-4f1c…', fullValue: 'af35b7de-4f1c-51ef-bc88-1282797490bd', mono: true, technical: true },
+  { label: 'JL ID',     value: '56c72b558d…',    fullValue: '56c72b558dc34f0100ba8707',               mono: true, technical: true },
 ]
 
 // DataDrawer sections

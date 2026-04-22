@@ -18,9 +18,10 @@ import {
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { cn } from '@/lib/utils'
+import { TH_CLS, TR_CLS } from '@/lib/constants'
+import ModuleHeader from '@/components/ModuleHeader'
+import Pill from '@/components/Pill'
 import { DSN_SECTIONS, DSN_MONTHS } from '@/lib/data'
-
-// ── Feedback badge ────────────────────────────────────────────────────────────
 
 const FEEDBACK_STYLES = {
   OK:        'bg-feedback-ok-subtle text-feedback-ok',
@@ -29,20 +30,9 @@ const FEEDBACK_STYLES = {
   SNGGO:     'bg-feedback-warn-subtle text-feedback-warn',
 }
 
-function FeedbackBadge({ code }) {
-  if (!code) return <span className="text-caption text-text-tertiary">—</span>
-  return (
-    <span className={cn('text-label px-1.5 py-0.5 rounded font-mono', FEEDBACK_STYLES[code])}>
-      {code}
-    </span>
-  )
-}
-
-// ── DSN module ────────────────────────────────────────────────────────────────
-
 export default function Dsn() {
-  const [month, setMonth]           = useState('All months')
-  const [sentOnly, setSentOnly]     = useState(false)
+  const [month,    setMonth]    = useState('All months')
+  const [sentOnly, setSentOnly] = useState(false)
 
   const filterRecords = (records) => {
     let r = records
@@ -57,16 +47,10 @@ export default function Dsn() {
 
   return (
     <section>
-      {/* Header + controls */}
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-h4 text-text-primary">DSN</h2>
+      <ModuleHeader title="DSN">
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2 cursor-pointer">
-            <Switch
-              checked={sentOnly}
-              onCheckedChange={setSentOnly}
-              className="scale-90"
-            />
+            <Switch checked={sentOnly} onCheckedChange={setSentOnly} className="scale-90" />
             <span className="text-caption text-text-secondary">Sent &amp; accepted</span>
           </label>
           <Select value={month} onValueChange={setMonth}>
@@ -75,24 +59,22 @@ export default function Dsn() {
             </SelectTrigger>
             <SelectContent>
               {DSN_MONTHS.map((m) => (
-                <SelectItem key={m} value={m} className="text-caption">
-                  {m}
-                </SelectItem>
+                <SelectItem key={m} value={m} className="text-caption">{m}</SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-      </div>
+      </ModuleHeader>
 
       <div className="rounded-md border border-border overflow-hidden">
         <Table>
           <TableHeader>
             <TableRow className="bg-surface-1 hover:bg-surface-1">
-              <TableHead className="text-label uppercase text-text-tertiary font-medium h-8 py-0 pl-4 w-28">Section</TableHead>
-              <TableHead className="text-label uppercase text-text-tertiary font-medium h-8 py-0">Period</TableHead>
-              <TableHead className="text-label uppercase text-text-tertiary font-medium h-8 py-0">Reference</TableHead>
-              <TableHead className="text-label uppercase text-text-tertiary font-medium h-8 py-0">Sent</TableHead>
-              <TableHead className="text-label uppercase text-text-tertiary font-medium h-8 py-0">Feedback</TableHead>
+              <TableHead className={cn(TH_CLS, 'pl-4 w-28')}>Section</TableHead>
+              <TableHead className={TH_CLS}>Period</TableHead>
+              <TableHead className={TH_CLS}>Reference</TableHead>
+              <TableHead className={TH_CLS}>Sent</TableHead>
+              <TableHead className={TH_CLS}>Feedback</TableHead>
               <TableHead className="h-8 py-0 pr-4 w-px" />
             </TableRow>
           </TableHeader>
@@ -102,11 +84,11 @@ export default function Dsn() {
               return (
                 <>
                   {/* Section group header */}
-                  <TableRow key={`${section.id}-header`} className="bg-surface-1 hover:bg-surface-1 border-t border-border">
-                    <TableCell
-                      colSpan={6}
-                      className="py-1.5 pl-4 pr-4"
-                    >
+                  <TableRow
+                    key={`${section.id}-header`}
+                    className="bg-surface-1 hover:bg-surface-1 border-t border-border"
+                  >
+                    <TableCell colSpan={6} className="py-1.5 pl-4 pr-4">
                       <div className="flex items-center gap-2">
                         <span className="text-label font-semibold text-text-secondary uppercase tracking-wide">
                           {section.label}
@@ -127,23 +109,23 @@ export default function Dsn() {
                     </TableRow>
                   ) : (
                     records.map((rec) => (
-                      <TableRow
-                        key={rec.id}
-                        className="group hover:bg-surface-1 transition-colors duration-fast"
-                      >
+                      <TableRow key={rec.id} className={TR_CLS}>
                         <TableCell className="py-2 pl-4" />
                         <TableCell className="py-2 text-body-sm text-text-primary">{rec.period}</TableCell>
                         <TableCell className="py-2 text-caption font-mono text-text-secondary">{rec.ref}</TableCell>
                         <TableCell className="py-2 text-caption text-text-secondary">{rec.sent}</TableCell>
                         <TableCell className="py-2">
-                          <FeedbackBadge code={rec.feedback} />
+                          {rec.feedback
+                            ? <Pill className={cn('font-mono', FEEDBACK_STYLES[rec.feedback])}>{rec.feedback}</Pill>
+                            : <span className="text-caption text-text-tertiary">—</span>
+                          }
                         </TableCell>
                         <TableCell className="py-2 pr-4">
                           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-fast">
-                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-text-tertiary" aria-label="View">
+                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-text-tertiary hover:text-text-primary" aria-label="View">
                               <Eye size={13} />
                             </Button>
-                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-text-tertiary" aria-label="Download">
+                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0 text-text-tertiary hover:text-text-primary" aria-label="Download">
                               <Download size={13} />
                             </Button>
                           </div>

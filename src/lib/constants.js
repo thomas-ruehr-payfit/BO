@@ -44,6 +44,10 @@ export const GLOBAL_NAV_BOTTOM = [
   { id: 'account',  label: 'Account',  icon: 'User' },
 ]
 
+// Shared table class strings — apply to every data table in the app
+export const TH_CLS = 'text-[10px] uppercase text-text-tertiary font-medium h-8 py-0'
+export const TR_CLS = 'group hover:bg-surface-1 transition-colors duration-fast'
+
 // Layout dimensions
 export const DIMENSIONS = {
   globalNav: { collapsed: 48, expanded: 160 },

@@ -25,7 +25,7 @@ export default function ContentArea({ currentPage, activeSub }) {
 
   return (
     <ScrollArea className="flex-1">
-      <div className="flex flex-col gap-4 p-5">
+      <div className="flex flex-col gap-8 p-7">
         {Route && <Route activeSub={activeSub} />}
       </div>
     </ScrollArea>

@@ -1,6 +1,7 @@
 import { Send, RotateCcw, FileText, AlertTriangle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import ModuleHeader from '@/components/ModuleHeader'
 import { DASHBOARD_TASK } from '@/lib/data'
 
 function StatusChip({ label, value, variant }) {
@@ -26,9 +27,7 @@ export default function Dashboard() {
 
   return (
     <section>
-      <div className="flex items-baseline justify-between mb-3">
-        <h2 className="text-h4 text-text-primary">Dashboard</h2>
-      </div>
+      <ModuleHeader title="Dashboard" />
 
       <div className="rounded-md border border-border overflow-hidden">
         {/* Card header */}
@@ -39,20 +38,17 @@ export default function Dashboard() {
             </span>
             <span className="text-caption text-text-tertiary">{t.period}</span>
             {t.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-label px-1.5 py-0.5 rounded bg-surface-3 text-text-secondary"
-              >
+              <span key={tag} className="text-label px-1.5 py-0.5 rounded bg-surface-3 text-text-secondary">
                 {tag}
               </span>
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <Button size="sm" variant="ghost" className="gap-1.5 text-caption text-text-secondary h-7 px-2">
+            <Button size="sm" variant="ghost" className="gap-1.5 text-caption text-text-secondary hover:text-text-primary h-7 px-2">
               <RotateCcw size={12} />
               Regenerate
             </Button>
-            <Button size="sm" variant="ghost" className="gap-1.5 text-caption text-text-secondary h-7 px-2">
+            <Button size="sm" variant="ghost" className="gap-1.5 text-caption text-text-secondary hover:text-text-primary h-7 px-2">
               <FileText size={12} />
               Preview
             </Button>
@@ -66,9 +62,9 @@ export default function Dashboard() {
         {/* Card body — metadata grid */}
         <div className="px-5 py-4 grid grid-cols-3 gap-x-8 gap-y-4 border-b border-border">
           <StatusChip label="Container" value={t.container} variant="accent" />
-          <StatusChip label="Type" value={t.type} />
-          <StatusChip label="Numéro" value={t.numero} />
-          <StatusChip label="Status" value={t.status} variant="success" />
+          <StatusChip label="Type"      value={t.type} />
+          <StatusChip label="Numéro"    value={t.numero} />
+          <StatusChip label="Status"    value={t.status} variant="success" />
           <StatusChip label="Generated" value={t.generated} />
         </div>
 

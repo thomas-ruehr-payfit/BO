@@ -52,12 +52,14 @@ export default function AppShell({
     }
     return (
       <>
-        <CompanyTopBar
-          currentCompany={currentCompany}
-          onCompanyChange={onCompanyChange}
-          onViewAll={onViewAllCompanies}
-        />
-        <div className="flex flex-1 min-h-0">
+        <div className="rounded-lg overflow-hidden shrink-0 border border-[#d8d2c7] shadow-sm">
+          <CompanyTopBar
+            currentCompany={currentCompany}
+            onCompanyChange={onCompanyChange}
+            onViewAll={onViewAllCompanies}
+          />
+        </div>
+        <div className="flex flex-1 min-h-0 rounded-[6px] overflow-hidden border border-[#d8d2c7] shadow-sm">
           <div className="flex flex-col flex-1 min-w-0">
             <FirstLevelNav currentPage={currentPage} onNavigate={onNavigate} />
             {hasSubTabs && (
@@ -76,9 +78,9 @@ export default function AppShell({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-surface-0">
+    <div className="flex h-screen overflow-hidden bg-canvas">
       <GlobalNav currentSpace={currentSpace} onSpaceChange={onSpaceChange} />
-      <div className="flex flex-col flex-1 min-w-0">
+      <div className="flex flex-col flex-1 min-w-0 p-2 gap-2">
         {renderMain()}
       </div>
     </div>

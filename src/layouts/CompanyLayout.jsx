@@ -23,7 +23,7 @@ export default function CompanyLayout() {
   return (
     <>
       <CompanyTopBar company={company} />
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-1 min-h-0 rounded-xl overflow-hidden border border-[#d8d2c7] shadow-sm bg-surface-0">
         <DataDrawer open={drawerOpen} onToggle={() => setDrawerOpen((v) => !v)} />
         <div className="flex flex-col flex-1 min-w-0">
           <FirstLevelNav currentPage={currentPage} companyId={companyId} />
@@ -31,7 +31,7 @@ export default function CompanyLayout() {
             <SubTabBar currentPage={currentPage} companyId={companyId} />
           )}
           <ScrollArea className="flex-1">
-            <div className="flex flex-col gap-4 p-5">
+            <div className="flex flex-col gap-4 p-10">
               <Outlet />
             </div>
           </ScrollArea>

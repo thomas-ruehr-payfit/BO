@@ -23,7 +23,7 @@ export default function MetaSection({ title, badge, defaultOpen = false, rows = 
 
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
-      <CollapsibleTrigger className="flex w-full items-center justify-between py-2 px-3 hover:bg-surface-2 rounded transition-colors duration-fast group">
+      <CollapsibleTrigger className="flex w-full items-center justify-between py-3 px-4 hover:bg-canvas rounded transition-colors duration-fast group">
         <div className="flex items-center gap-2">
           <span className="text-label uppercase text-text-secondary font-medium tracking-wide">
             {title}
@@ -48,7 +48,7 @@ export default function MetaSection({ title, badge, defaultOpen = false, rows = 
         />
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="px-3 pb-2 flex flex-col">
+        <div className="px-4 pb-3 flex flex-col">
           {rows.map((row) => (
             <MetaRow key={row.label} {...row} />
           ))}

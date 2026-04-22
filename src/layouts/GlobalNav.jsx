@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Building2, FileText, FolderOpen, CreditCard,
   Clock, Settings, User,
-  ChevronRight, ChevronLeft, Search,
+  PanelLeft, Search,
 } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
@@ -48,8 +48,8 @@ function NavItem({ item, active, expanded, onClick }) {
         'flex items-center gap-3 w-full rounded px-2 py-2',
         'transition-colors duration-fast text-left',
         active
-          ? 'bg-accent-subtle text-accent'
-          : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
+          ? 'bg-accent-subtle text-text-primary'
+          : 'text-text-secondary hover:bg-surface-warm hover:text-text-primary',
       )}
     >
       <Icon size={16} className="shrink-0" />
@@ -117,7 +117,7 @@ function CompanySearch({ expanded, onExpand, onNavigate }) {
             onFocus={() => query && setOpen(true)}
             placeholder="Search companies…"
             className={cn(
-              'w-full pl-6 pr-2 py-1.5 rounded text-caption bg-surface-2',
+              'w-full pl-6 pr-2 py-1.5 rounded text-caption bg-surface-1',
               'border border-transparent focus:border-border-strong focus:outline-none',
               'text-text-primary placeholder:text-text-tertiary',
               'transition-colors duration-fast',
@@ -129,7 +129,7 @@ function CompanySearch({ expanded, onExpand, onNavigate }) {
         <button
           type="button"
           onClick={handleIconClick}
-          className="flex items-center justify-center w-8 h-8 rounded text-text-tertiary hover:bg-surface-2 hover:text-text-primary transition-colors duration-fast"
+          className="flex items-center justify-center w-8 h-8 rounded text-text-tertiary hover:bg-surface-warm hover:text-text-primary transition-colors duration-fast"
           aria-label="Search companies"
         >
           <Search size={15} />
@@ -168,7 +168,7 @@ export default function GlobalNav() {
   return (
     <nav
       className={cn(
-        'flex flex-col shrink-0 bg-surface-1 border-r border-border',
+        'flex flex-col shrink-0 bg-surface-0',
         'transition-[width] duration-base overflow-hidden',
         expanded ? 'w-44' : 'w-12',
       )}
@@ -181,6 +181,16 @@ export default function GlobalNav() {
       </div>
 
       <Separator />
+
+      {/* Expand / collapse toggle */}
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        className="flex items-center justify-center h-9 shrink-0 text-text-tertiary hover:text-text-primary hover:bg-surface-warm transition-colors duration-fast"
+        aria-label={expanded ? 'Collapse nav' : 'Expand nav'}
+      >
+        <PanelLeft size={14} />
+      </button>
 
       {/* Search + Companies */}
       <div className="flex flex-col gap-0.5 px-0 py-2 shrink-0">
@@ -204,7 +214,7 @@ export default function GlobalNav() {
       <Separator />
 
       {/* Middle — Declarations / Documents / Billing */}
-      <div className="flex-1 flex flex-col gap-0.5 px-2 py-2 overflow-hidden">
+      <div className="flex-1 flex flex-col justify-center gap-0.5 px-2 py-2 overflow-hidden">
         {MIDDLE.map((item) => (
           <NavItem
             key={item.id}
@@ -231,17 +241,6 @@ export default function GlobalNav() {
         ))}
       </div>
 
-      <Separator />
-
-      {/* Expand / collapse toggle */}
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        className="flex items-center justify-center h-10 shrink-0 text-text-tertiary hover:text-text-primary hover:bg-surface-2 transition-colors duration-fast"
-        aria-label={expanded ? 'Collapse nav' : 'Expand nav'}
-      >
-        {expanded ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
-      </button>
     </nav>
   )
 }

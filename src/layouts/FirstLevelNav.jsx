@@ -25,7 +25,7 @@ export default function FirstLevelNav({ currentPage, companyId }) {
       </div>
       <div className="flex-1" />
       <div className="flex items-stretch gap-1">
-        <Separator orientation="vertical" className="my-2 mr-2" />
+        {secondary.length > 0 && <Separator orientation="vertical" className="self-center h-4 mr-2" />}
         {secondary.map((item) => (
           <NavTab key={item.id} item={item} active={currentPage === item.id} onNavigate={handleNavigate} />
         ))}

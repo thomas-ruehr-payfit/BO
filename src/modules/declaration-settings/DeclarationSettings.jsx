@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
+import ModuleHeader from '@/components/ModuleHeader'
 
 // ── Layout primitives ─────────────────────────────────────────────────────────
 
@@ -23,7 +24,7 @@ function SettingsGroup({ title, children }) {
   )
 }
 
-function SettingsRow({ label, children, description }) {
+function SettingsRow({ label, description, children }) {
   return (
     <div className="flex items-center justify-between gap-4 px-4 py-3 bg-surface-0">
       <div>
@@ -43,9 +44,8 @@ const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
-
-const YEARS  = ['2023', '2024', '2025', '2026']
-const DAYS   = Array.from({ length: 31 }, (_, i) => String(i + 1))
+const YEARS = ['2023', '2024', '2025', '2026']
+const DAYS  = Array.from({ length: 31 }, (_, i) => String(i + 1))
 
 export default function DeclarationSettings() {
   const [submissionEnabled, setSubmissionEnabled] = useState(true)
@@ -81,9 +81,7 @@ export default function DeclarationSettings() {
 
   return (
     <section>
-      <div className="flex items-baseline justify-between mb-3">
-        <h2 className="text-h4 text-text-primary">Declaration settings</h2>
-      </div>
+      <ModuleHeader title="Declaration settings" />
 
       <div className="flex flex-col gap-5">
         {/* Net-Entreprises */}
@@ -117,12 +115,13 @@ export default function DeclarationSettings() {
 
         {/* Declaration start date */}
         <SettingsGroup title="Declaration start date">
-          <SettingsRow label="Start date" description="First period covered by declarations for this company.">
+          <SettingsRow
+            label="Start date"
+            description="First period covered by declarations for this company."
+          >
             <div className="flex items-center gap-2">
               <Select value={startMonth} onValueChange={(v) => handleChange('month', v)}>
-                <SelectTrigger className="h-8 text-caption w-32">
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="h-8 text-caption w-32"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {MONTHS.map((m) => (
                     <SelectItem key={m} value={m} className="text-caption">{m}</SelectItem>
@@ -130,9 +129,7 @@ export default function DeclarationSettings() {
                 </SelectContent>
               </Select>
               <Select value={startYear} onValueChange={(v) => handleChange('year', v)}>
-                <SelectTrigger className="h-8 text-caption w-24">
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="h-8 text-caption w-24"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {YEARS.map((y) => (
                     <SelectItem key={y} value={y} className="text-caption">{y}</SelectItem>
@@ -140,9 +137,7 @@ export default function DeclarationSettings() {
                 </SelectContent>
               </Select>
               <Select value={startDay} onValueChange={(v) => handleChange('day', v)}>
-                <SelectTrigger className="h-8 text-caption w-20">
-                  <SelectValue />
-                </SelectTrigger>
+                <SelectTrigger className="h-8 text-caption w-20"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   {DAYS.map((d) => (
                     <SelectItem key={d} value={d} className="text-caption">{d}</SelectItem>
@@ -159,15 +154,11 @@ export default function DeclarationSettings() {
                 size="sm"
                 variant="ghost"
                 onClick={handleDiscard}
-                className="h-7 px-3 text-caption text-text-secondary"
+                className="h-7 px-3 text-caption text-text-secondary hover:text-text-primary"
               >
                 Discard
               </Button>
-              <Button
-                size="sm"
-                onClick={handleSave}
-                className="h-7 px-3 text-caption"
-              >
+              <Button size="sm" onClick={handleSave} className="h-7 px-3 text-caption">
                 Save
               </Button>
             </div>
