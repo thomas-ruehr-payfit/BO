@@ -2,14 +2,15 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Building2, FileText, FolderOpen, CreditCard,
-  Clock, Settings, User,
+  Clock, Settings, User, Users, FlaskConical,
   PanelLeft, Search,
 } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { COMPANIES } from '@/lib/data'
 
-const ICON_MAP = { Building2, FileText, FolderOpen, CreditCard, Clock, Settings, User }
+const ICON_MAP = { Building2, FileText, FolderOpen, CreditCard, Clock, Settings, User, Users, FlaskConical }
 
 const TOP = [
   { id: 'companies', label: 'Companies', icon: 'Building2', path: '/companies' },
@@ -19,12 +20,14 @@ const MIDDLE = [
   { id: 'declarations', label: 'Declarations', icon: 'FileText',   path: '/declarations' },
   { id: 'documents',    label: 'Documents',    icon: 'FolderOpen', path: '/documents' },
   { id: 'billing',      label: 'Billing',      icon: 'CreditCard', path: '/billing' },
+  { id: 'activity',     label: 'Activity',     icon: 'Clock',      path: '/activity' },
 ]
 
 const BOTTOM = [
-  { id: 'timeline', label: 'Timeline', icon: 'Clock',    path: '/timeline' },
-  { id: 'settings', label: 'Settings', icon: 'Settings', path: '/settings' },
-  { id: 'account',  label: 'Account',  icon: 'User',     path: '/account' },
+  { id: 'users',    label: 'Users',    icon: 'Users',        path: '/users' },
+  { id: 'settings', label: 'Settings', icon: 'Settings',     path: '/settings' },
+  { id: 'account',  label: 'Account',  icon: 'User',         path: '/account' },
+  { id: 'test',     label: 'TEST',     icon: 'FlaskConical', path: '/test' },
 ]
 
 function activeSpace(pathname) {
@@ -32,31 +35,42 @@ function activeSpace(pathname) {
   if (pathname.startsWith('/declarations')) return 'declarations'
   if (pathname.startsWith('/documents'))    return 'documents'
   if (pathname.startsWith('/billing'))      return 'billing'
-  if (pathname.startsWith('/timeline'))     return 'timeline'
+  if (pathname.startsWith('/activity'))     return 'activity'
   if (pathname.startsWith('/settings'))     return 'settings'
+  if (pathname.startsWith('/users'))        return 'users'
   if (pathname.startsWith('/account'))      return 'account'
+  if (pathname.startsWith('/test'))         return 'test'
   return null
 }
 
 function NavItem({ item, active, expanded, onClick }) {
   const Icon = ICON_MAP[item.icon]
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        'flex items-center gap-3 w-full rounded px-2 py-2',
-        'transition-colors duration-fast text-left',
-        active
-          ? 'bg-black/[0.07] text-text-primary'
-          : 'text-text-secondary hover:bg-black/[0.04] hover:text-text-primary',
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          type="button"
+          onClick={onClick}
+          className={cn(
+            'flex items-center gap-3 w-full rounded px-2 py-2',
+            'transition-colors duration-fast text-left',
+            active
+              ? 'bg-black/[0.07] text-text-primary'
+              : 'text-text-secondary hover:bg-black/[0.04] hover:text-text-primary',
+          )}
+        >
+          <Icon size={16} className="shrink-0" />
+          {expanded && (
+            <span className="text-body-sm font-medium truncate">{item.label}</span>
+          )}
+        </button>
+      </TooltipTrigger>
+      {!expanded && (
+        <TooltipContent side="right" className="bg-black !text-white border-0 text-caption px-2 py-1">
+          {item.label}
+        </TooltipContent>
       )}
-    >
-      <Icon size={16} className="shrink-0" />
-      {expanded && (
-        <span className="text-body-sm font-medium truncate">{item.label}</span>
-      )}
-    </button>
+    </Tooltip>
   )
 }
 
@@ -126,19 +140,26 @@ function CompanySearch({ expanded, onExpand, onNavigate }) {
         </div>
       ) : (
         /* Collapsed — icon button */
-        <button
-          type="button"
-          onClick={handleIconClick}
-          className="flex items-center justify-center w-8 h-8 rounded text-text-tertiary hover:bg-black/[0.04] hover:text-text-primary transition-colors duration-fast"
-          aria-label="Search companies"
-        >
-          <Search size={15} />
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              type="button"
+              onClick={handleIconClick}
+              className="flex items-center justify-center w-8 h-8 rounded text-text-tertiary hover:bg-black/[0.04] hover:text-text-primary transition-colors duration-fast"
+              aria-label="Search companies"
+            >
+              <Search size={15} />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent side="right" className="bg-black !text-white border-0 text-caption px-2 py-1">
+            Search
+          </TooltipContent>
+        </Tooltip>
       )}
 
       {/* Results dropdown */}
       {open && results.length > 0 && (
-        <div className="absolute left-2 right-2 top-full mt-1 z-50 bg-surface-warm border border-black/10 rounded-md shadow-md overflow-hidden">
+        <div className="absolute left-2 right-2 top-full mt-1 z-50 bg-surface-0 border border-black/10 rounded-md shadow-md overflow-hidden">
           {results.map((company) => (
             <button
               key={company.id}
@@ -166,9 +187,10 @@ export default function GlobalNav() {
   const space = activeSpace(location.pathname)
 
   return (
+    <TooltipProvider delayDuration={300}>
     <nav
       className={cn(
-        'flex flex-col shrink-0 bg-surface-warm',
+        'flex flex-col shrink-0 bg-surface-0 sticky top-0 h-screen',
         'transition-[width] duration-base overflow-hidden',
         expanded ? 'w-44' : 'w-12',
       )}
@@ -225,8 +247,13 @@ export default function GlobalNav() {
 
       <Separator className="bg-black/[0.08]" />
 
-      {/* Middle — Declarations / Documents / Billing */}
+      {/* Middle — Global overview */}
       <div className="flex-1 flex flex-col justify-center gap-0.5 px-2 py-2 overflow-hidden">
+        {expanded && (
+          <span className="px-2 pb-0.5 text-label text-text-tertiary uppercase tracking-wide">
+            Global overview
+          </span>
+        )}
         {MIDDLE.map((item) => (
           <NavItem
             key={item.id}
@@ -254,5 +281,6 @@ export default function GlobalNav() {
       </div>
 
     </nav>
+    </TooltipProvider>
   )
 }

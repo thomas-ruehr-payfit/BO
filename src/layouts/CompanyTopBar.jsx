@@ -35,8 +35,8 @@ function TechnicalChip({ label, fullValue }) {
         </TooltipTrigger>
       </div>
       {copied && (
-        <TooltipContent side="bottom" className="bg-surface-2 text-text-primary border border-border shadow-sm text-caption px-2 py-1">
-          Copied
+        <TooltipContent side="bottom" className="bg-black !text-white border-0 text-caption px-2 py-1">
+          Copied !
         </TooltipContent>
       )}
     </Tooltip>
@@ -78,15 +78,15 @@ export default function CompanyTopBar({ company }) {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="bg-[#e8e2d7] border border-[#d8d2c7] rounded-xl shrink-0">
+      <div className="bg-surface-topbar border border-border-warm rounded-xl shrink-0">
 
         {/* Technical strip */}
-        <div className="flex items-center gap-4 px-4 py-1.5 overflow-hidden">
+        <div className="flex items-center gap-4 px-4 py-1.5 w-fit">
           <a
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-caption text-text-secondary hover:text-text-primary transition-colors duration-fast shrink-0 mr-auto"
+            className="inline-flex items-center gap-1 text-caption text-text-secondary hover:text-text-primary transition-colors duration-fast shrink-0"
           >
             Billing Account
             <ExternalLink size={10} />
@@ -98,7 +98,7 @@ export default function CompanyTopBar({ company }) {
 
         {/* White card */}
         <div
-          className="relative flex items-center bg-surface-0 border border-[#d8d2c7] rounded-xl shadow-sm mx-[-1px] mb-[-1px]"
+          className="relative flex items-center bg-surface-0 border border-border-warm rounded-xl shadow-sm mx-[-1px] mb-[-1px]"
           style={{ minHeight: 68 }}
         >
           {/* Identity area */}
@@ -130,25 +130,25 @@ export default function CompanyTopBar({ company }) {
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Right badges: Cycle + Status */}
-          <div className="flex items-center gap-2 pr-4 shrink-0">
-            {badgeChips.map((chip) => (
-              <TopBarChip key={chip.label} {...chip} />
-            ))}
-          </div>
-
           {/* Right meta columns */}
-          <div className="flex items-center border-l border-[#d8d2c7] shrink-0">
+          <div className="flex items-center border-l border-border-warm shrink-0">
             {metaChips.map((chip, i) => (
-              <div key={chip.label} className={cn('flex items-center', i < metaChips.length - 1 && 'border-r border-[#d8d2c7]')}>
+              <div key={chip.label} className={cn('flex items-center', i < metaChips.length - 1 && 'border-r border-border-warm')}>
                 <MetaCol label={chip.label} value={chip.value} />
               </div>
             ))}
           </div>
 
-          {/* Log In button */}
-          <div className="pl-5 pr-4 flex items-center shrink-0">
-            <Button size="sm" variant="outline" className="gap-1.5 text-body-sm">
+          {/* Right badges: Cycle + Status */}
+          <div className="flex items-center gap-2 px-4 border-l border-border-warm shrink-0">
+            {badgeChips.map((chip) => (
+              <TopBarChip key={chip.label} {...chip} />
+            ))}
+          </div>
+
+          {/* Log In button — separated from badges */}
+          <div className="pl-4 pr-4 flex items-center shrink-0 border-l border-border-warm">
+            <Button size="sm" variant="outline" className="gap-1.5 text-body-sm text-text-primary hover:bg-surface-1 hover:text-text-primary">
               <LogIn size={13} />
               Log In
             </Button>

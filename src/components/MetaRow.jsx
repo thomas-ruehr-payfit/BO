@@ -57,8 +57,8 @@ export default function MetaRow({ label, value, faded, encrypted, badgeVariant }
         </TooltipTrigger>
       </div>
       {copied && (
-        <TooltipContent side="top" className="bg-surface-2 text-text-primary border border-border shadow-sm text-caption px-2 py-1">
-          Copied
+        <TooltipContent side="top" className="bg-black !text-white border-0 text-caption px-2 py-1">
+          Copied !
         </TooltipContent>
       )}
     </Tooltip>

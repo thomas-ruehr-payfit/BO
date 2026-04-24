@@ -21,7 +21,7 @@ import { cn } from '@/lib/utils'
 import { TH_CLS, TR_CLS } from '@/lib/constants'
 import ModuleHeader from '@/components/ModuleHeader'
 import Pill from '@/components/Pill'
-import { FILES, FILE_CATEGORIES, FILE_MONTHS, EMPLOYEES } from '@/lib/data'
+import { FILES, FILE_CATEGORIES, FILE_MONTHS, PEOPLE } from '@/lib/data'
 
 const CATEGORY_STYLES = {
   Payslips: 'bg-category-payslips-subtle text-category-payslips',
@@ -31,7 +31,10 @@ const CATEGORY_STYLES = {
   Other:    'bg-category-other-subtle    text-category-other',
 }
 
-const EMPLOYEE_OPTIONS = ['All employees', ...EMPLOYEES.map((e) => e.name)]
+const EMPLOYEE_OPTIONS = [
+  'All employees',
+  ...PEOPLE.filter((p) => p.portals.includes('collaborator')).map((p) => p.name),
+]
 
 export default function FilesArchive() {
   const [search,   setSearch]   = useState('')

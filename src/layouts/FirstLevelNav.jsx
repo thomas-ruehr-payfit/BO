@@ -14,7 +14,7 @@ export default function FirstLevelNav({ currentPage, companyId }) {
 
   return (
     <div
-      className="flex items-end border-b border-surface-3 bg-surface-0 shrink-0 px-10 mt-3 pb-3"
+      className="flex items-end bg-surface-0 shrink-0 px-10 mt-1.5 pb-3"
       style={{ height: 56 }}
     >
       <div className="flex items-center gap-1">
@@ -39,14 +39,14 @@ function NavTab({ item, active, onNavigate }) {
       type="button"
       onClick={() => onNavigate(item.id)}
       className={cn(
-        'flex items-center gap-2 rounded-full text-[17px] transition-colors duration-fast',
-        item.label ? 'px-5 py-1.5' : 'p-2',
+        'flex items-center gap-1.5 rounded-full text-[17px] font-normal transition-colors duration-fast',
+        item.label ? 'px-4 py-1.5' : 'p-2',
         active
-          ? 'bg-surface-2 text-text-primary font-semibold'
-          : 'text-text-primary font-normal hover:bg-surface-1',
+          ? 'bg-text-primary text-white'
+          : 'text-text-primary hover:bg-surface-1',
       )}
     >
-      {Icon && <Icon size={16} className="shrink-0" />}
+      {Icon && <Icon size={14} className="shrink-0" />}
       {item.label}
     </button>
   )

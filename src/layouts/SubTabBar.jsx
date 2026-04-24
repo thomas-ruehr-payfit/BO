@@ -10,10 +10,8 @@ export default function SubTabBar({ currentPage, companyId }) {
   if (!tabs) return null
 
   return (
-    <div
-      className="flex items-center gap-1 bg-surface-0 px-10 shrink-0 mt-3"
-      style={{ height: 36 }}
-    >
+    <div className="bg-surface-0 shrink-0 mt-1.5 px-10">
+      <div className="flex items-center gap-1 border-t border-surface-3 pt-6 pb-3">
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -29,6 +27,7 @@ export default function SubTabBar({ currentPage, companyId }) {
           {tab.label}
         </button>
       ))}
+      </div>
     </div>
   )
 }

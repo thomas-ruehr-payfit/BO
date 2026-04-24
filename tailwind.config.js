@@ -5,26 +5,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Canvas — warm cream page background
-        canvas: '#F1ECE1',
-        // Surface layers — differentiated by subtle value shifts
+        // Canvas — parchment page background
+        canvas: '#FAFAFA',
+        // Surface layers — parchment scale, lightest to darkest
         surface: {
-          0: '#ffffff',
-          1: '#f7f7f8',
-          2: '#f0f0f2',
-          3: '#e8e8eb',
-          warm: '#FFFAF0',
+          0:      '#ffffff',   // pure white — cards, main panels
+          1:      '#F6F6F6',   // off-white — content area background
+          2:      '#EBEBEB',   // light grey — sub-nav, active tab bg
+          3:      '#E3E3E3',   // grey — badges, count chips, dividers
+          topbar: '#EFEFEF',  // light grey — company top bar bg
         },
         // Borders
         border: {
-          DEFAULT: '#e2e2e5',
-          strong: '#c8c8cc',
+          DEFAULT: '#e2e2e5', // cool grey — content elements (tables, inputs, rows)
+          strong:  '#c8c8cc',
+          warm:    '#E9E9E9', // parchment — panel/card containers on canvas
         },
         // Text hierarchy
         text: {
-          primary:   '#0f0f10',
-          secondary: '#5c5c66',
-          tertiary:  '#9898a0',
+          primary:   '#1D1D1D',
+          secondary: '#686663',
+          tertiary:  '#A2A2A2',
         },
         // Single accent — used intentionally
         accent: {
@@ -48,6 +49,7 @@ export default {
         feedback: {
           ok:   { DEFAULT: '#16a34a', subtle: '#f0fdf4' },
           warn: { DEFAULT: '#d97706', subtle: '#fffbeb' },
+          info: { DEFAULT: '#2563eb', subtle: '#eff6ff' },
         },
         // File category colors
         category: {

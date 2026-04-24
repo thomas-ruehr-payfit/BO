@@ -12,6 +12,7 @@ import Declaration       from '@/routes/Declaration'
 import Files             from '@/routes/Files'
 import Timeline          from '@/routes/Timeline'
 import AdvancedActions   from '@/routes/AdvancedActions'
+import Test             from '@/routes/Test'
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,11 @@ const router = createBrowserRouter([
       { path: 'declarations', element: <SpacePlaceholder space="declarations" /> },
       { path: 'documents',    element: <SpacePlaceholder space="documents" /> },
       { path: 'billing',      element: <SpacePlaceholder space="billing" /> },
-      { path: 'timeline',     element: <SpacePlaceholder space="timeline" /> },
+      { path: 'activity',     element: <SpacePlaceholder space="activity" /> },
       { path: 'settings',     element: <SpacePlaceholder space="settings" /> },
+      { path: 'users',        element: <SpacePlaceholder space="users" /> },
       { path: 'account',      element: <SpacePlaceholder space="account" /> },
+      { path: 'test',         element: <Test /> },
     ],
   },
 ])

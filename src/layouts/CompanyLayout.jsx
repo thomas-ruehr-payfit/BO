@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Outlet, useParams, Navigate, useLocation } from 'react-router-dom'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import CompanyTopBar from '@/layouts/CompanyTopBar'
+import CompanyTopBarV2 from '@/layouts/CompanyTopBarV2'
 import FirstLevelNav from '@/layouts/FirstLevelNav'
 import SubTabBar     from '@/layouts/SubTabBar'
 import DataDrawer    from '@/layouts/DataDrawer'
@@ -21,22 +21,24 @@ export default function CompanyLayout() {
   const hasSubTabs  = PAGES_WITH_SUBS.has(currentPage)
 
   return (
-    <>
-      <CompanyTopBar company={company} />
-      <div className="flex flex-1 min-h-0 rounded-xl overflow-hidden border border-[#d8d2c7] shadow-sm bg-surface-0">
-        <DataDrawer open={drawerOpen} onToggle={() => setDrawerOpen((v) => !v)} />
-        <div className="flex flex-col flex-1 min-w-0">
+    <div className="flex flex-col flex-1 min-h-0">
+      {company.id === 'smiles-inc' ? (
+        <CompanyTopBar company={company} />
+      ) : (
+        <CompanyTopBarV2 company={company} />
+      )}
+      <div className="flex flex-1 rounded-xl border border-border-warm shadow-sm bg-surface-1 overflow-hidden">
+        <div className="flex flex-col flex-1 min-w-0 rounded-xl bg-surface-0 border border-border-warm -ml-px -mt-px -mb-px min-h-0 overflow-hidden">
           <FirstLevelNav currentPage={currentPage} companyId={companyId} />
           {hasSubTabs && (
             <SubTabBar currentPage={currentPage} companyId={companyId} />
           )}
-          <ScrollArea className="flex-1">
-            <div className="flex flex-col gap-4 p-10">
-              <Outlet />
-            </div>
-          </ScrollArea>
+          <div className="flex flex-col gap-4 p-10">
+            <Outlet />
+          </div>
         </div>
+        <DataDrawer open={drawerOpen} onToggle={() => setDrawerOpen((v) => !v)} />
       </div>
-    </>
+    </div>
   )
 }

@@ -64,7 +64,7 @@ export default function TopBarChip({ label, value, fullValue, warn, dim, mono, s
             <span className="flex items-center py-1 bg-feedback-warn-subtle">
               <span className="w-px h-full bg-feedback-warn/25" />
             </span>
-            <span className="flex items-center gap-1 px-2 bg-white">
+            <span className="flex items-center gap-1 px-2 bg-surface-0">
               <TriangleAlert size={11} strokeWidth={2.5} className="text-feedback-warn shrink-0" />
               <span className="text-label font-semibold text-feedback-warn leading-none">{suffix}</span>
             </span>
@@ -72,8 +72,8 @@ export default function TopBarChip({ label, value, fullValue, warn, dim, mono, s
         )}
       </div>
       {copied && (
-        <TooltipContent side="bottom" className="bg-surface-2 text-text-primary border border-border shadow-sm text-caption px-2 py-1">
-          Copied
+        <TooltipContent side="bottom" className="bg-black !text-white border-0 text-caption px-2 py-1">
+          Copied !
         </TooltipContent>
       )}
     </Tooltip>

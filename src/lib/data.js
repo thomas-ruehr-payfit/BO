@@ -1,17 +1,22 @@
 // Mock data from BO-currentspecs.md
 
-// --- Employees ---
-// contract: 'CDI' | 'CDD'
-// role: 'Admin' | 'Employee'
-// status: 'active' | 'inactive' | 'off'
-export const EMPLOYEES = [
-  { id: 1, name: 'Alice Martin',     contract: 'CDI', role: 'Admin',    status: 'active',   start: '2022-03-14' },
-  { id: 2, name: 'Thomas Bernard',   contract: 'CDI', role: 'Admin',    status: 'active',   start: '2021-11-02' },
-  { id: 3, name: 'Sophie Leclerc',   contract: 'CDD', role: 'Employee', status: 'active',   start: '2023-06-01' },
-  { id: 4, name: 'Julien Morel',     contract: 'CDI', role: 'Employee', status: 'active',   start: '2020-08-15' },
-  { id: 5, name: 'Emma Petit',       contract: 'CDD', role: 'Employee', status: 'inactive', start: '2023-09-01' },
-  { id: 6, name: 'Romain Dubois',    contract: 'CDI', role: 'Employee', status: 'active',   start: '2019-04-22' },
-  { id: 7, name: 'Camille Rousseau', contract: 'CDI', role: 'Employee', status: 'off',      start: '2022-01-10' },
+// --- People ---
+// portals: ('admin' | 'manager' | 'accountant' | 'collaborator')[]
+// contract: 'CDI' | 'CDD' | null
+// status: 'active' | 'invited' | 'disabled'
+export const PEOPLE = [
+  { id: 'p1',  name: 'Claire Fontaine',  email: 'claire.fontaine@smiles.inc',  uid: 'cf100001-ab2d-4e30-8765-100010001001', portals: ['admin', 'collaborator'],               contract: 'CDI', status: 'active'   },
+  { id: 'p2',  name: 'Nicolas Aubert',   email: 'nicolas.aubert@smiles.inc',   uid: 'ab200002-bc3e-4f41-8766-200020002002', portals: ['admin'],                               contract: null,  status: 'active'   },
+  { id: 'p3',  name: 'Isabelle Renaud',  email: 'isabelle.renaud@smiles.inc',  uid: 'cd300003-def0-4e52-8767-300030003003', portals: ['admin', 'accountant', 'collaborator'], contract: 'CDI', status: 'active'   },
+  { id: 'p4',  name: 'Marc Tissier',     email: 'marc.tissier@smiles.inc',     uid: 'ef400004-fa01-4b63-8768-400040004004', portals: ['admin', 'manager'],                    contract: null,  status: 'invited'  },
+  { id: 'p5',  name: 'Lucie Garnier',    email: 'lucie.garnier@smiles.inc',    uid: 'be500005-ec12-4974-8769-500050005005', portals: ['accountant', 'collaborator'],           contract: 'CDI', status: 'disabled' },
+  { id: 'p6',  name: 'Alice Martin',     email: 'alice.martin@smiles.inc',     uid: 'a1b2c3d4-e5f6-4890-ab12-ef1234567890', portals: ['manager', 'collaborator'],             contract: 'CDI', status: 'active'   },
+  { id: 'p7',  name: 'Thomas Bernard',   email: 'thomas.bernard@smiles.inc',   uid: 'b2c3d4e5-f670-4012-bc23-f12345678901', portals: ['collaborator'],                        contract: 'CDI', status: 'active'   },
+  { id: 'p8',  name: 'Sophie Leclerc',   email: 'sophie.leclerc@smiles.inc',   uid: 'c3d4e5f6-7890-4234-cd34-123456789012', portals: ['collaborator'],                        contract: 'CDD', status: 'active'   },
+  { id: 'p9',  name: 'Julien Morel',     email: 'julien.morel@smiles.inc',     uid: 'd4e5f678-9012-4456-de45-234567890123', portals: ['collaborator'],                        contract: 'CDI', status: 'active'   },
+  { id: 'p10', name: 'Emma Petit',       email: 'emma.petit@smiles.inc',       uid: 'e5f67890-1234-4678-ef56-345678901234', portals: ['collaborator'],                        contract: 'CDD', status: 'disabled' },
+  { id: 'p11', name: 'Romain Dubois',    email: 'romain.dubois@smiles.inc',    uid: 'f6789012-3456-4890-fa67-456789012345', portals: ['collaborator'],                        contract: 'CDI', status: 'active'   },
+  { id: 'p12', name: 'Camille Rousseau', email: 'camille.rousseau@smiles.inc', uid: '78901234-5678-4012-ab78-567890123456', portals: ['collaborator'],                        contract: 'CDI', status: 'disabled' },
 ]
 
 // Headcount chart — 24 months, Apr 2024 → Mar 2026
@@ -232,17 +237,6 @@ export const TIMELINE_EVENTS = [
 
 export const TIMELINE_TYPES = ['All types', 'non-regression', 'sign-in', 'correction']
 
-// --- Admins ---
-// status: 'active' | 'invited' | 'disabled'
-// permissions: array of 'Administrator' | 'Accountant'
-// primaryContact: boolean
-export const ADMINS = [
-  { id: 1, name: 'Claire Fontaine', role: 'HR Manager',            status: 'active',   permissions: [],               primaryContact: true },
-  { id: 2, name: 'Nicolas Aubert',  role: 'CEO',                   status: 'active',   permissions: [],               primaryContact: false },
-  { id: 3, name: 'Isabelle Renaud', role: 'Finance Director',       status: 'active',   permissions: ['Accountant'],   primaryContact: false },
-  { id: 4, name: 'Marc Tissier',    role: 'Office Manager',         status: 'invited',  permissions: [],               primaryContact: false },
-  { id: 5, name: 'Lucie Garnier',   role: 'Payroll Administrator',  status: 'disabled', permissions: ['Accountant'],   primaryContact: false },
-]
 
 export const ORG_NAME = 'Faces org'
 
@@ -252,10 +246,45 @@ export const COMPANIES = [
   { id: 'smiles-technologies', name: 'Smiles Technologies', siret: '45785745600089', status: 'inactive', plan: 'RH+', employees: 3  },
 ]
 
+// cycle: { absMonth, daysLate }
+// absMonth: absolute month counter — January 2015 = 1, April 2026 = 136
+// daysLate: null if on current cycle (April 2026 = 136), otherwise days overdue
+export const ORGANISATIONS = [
+  {
+    id: 'faces-group',
+    name: 'Faces Group',
+    companies: [
+      { id: 'smiles-inc',          name: 'Smiles.Inc',          siret: '45785745673245', status: 'active',   employees: 7,  cycle: { absMonth: 135, daysLate: 30  } },
+      { id: 'smiles-operations',   name: 'Smiles Operations',   siret: '45785745600012', status: 'active',   employees: 12, cycle: { absMonth: 136, daysLate: null } },
+      { id: 'smiles-technologies', name: 'Smiles Technologies', siret: '45785745600089', status: 'inactive', employees: 3,  cycle: { absMonth: 136, daysLate: null } },
+      { id: 'smiles-studios',      name: 'Smiles Studios',      siret: '45785745600156', status: 'active',   employees: 5,  cycle: { absMonth: 136, daysLate: null } },
+    ],
+  },
+  {
+    id: 'vertigo',
+    name: 'Vertigo',
+    companies: [
+      { id: 'vertigo-paris', name: 'Vertigo Paris', siret: '72394856100021', status: 'active', employees: 24, cycle: { absMonth: 136, daysLate: null } },
+      { id: 'vertigo-lyon',  name: 'Vertigo Lyon',  siret: '72394856100048', status: 'active', employees: 8,  cycle: { absMonth: 135, daysLate: 15   } },
+    ],
+  },
+  {
+    id: 'northstar',
+    name: 'Northstar',
+    companies: [
+      { id: 'northstar-sas',        name: 'Northstar SAS',        siret: '89123456700041', status: 'active',   employees: 31, cycle: { absMonth: 136, daysLate: null } },
+      { id: 'northstar-holding',    name: 'Northstar Holding',    siret: '89123456700058', status: 'inactive', employees: 1,  cycle: { absMonth: 133, daysLate: 75   } },
+      { id: 'northstar-digital',    name: 'Northstar Digital',    siret: '89123456700065', status: 'active',   employees: 15, cycle: { absMonth: 136, daysLate: null } },
+      { id: 'northstar-events',     name: 'Northstar Events',     siret: '89123456700072', status: 'active',   employees: 6,  cycle: { absMonth: 136, daysLate: null } },
+      { id: 'northstar-consulting', name: 'Northstar Consulting', siret: '89123456700089', status: 'active',   employees: 9,  cycle: { absMonth: 134, daysLate: 20   } },
+    ],
+  },
+]
+
 // Status chips for CompanyTopBar
 // dividerAfter: true → render a vertical separator after this chip
 export const STATUS_CHIPS = [
-  { label: 'Cycle',     value: 'Mar 26 · 125', fullValue: null, warn: true, badge: true, calendarIcon: true, suffix: '+30 days' },
+  { label: 'Cycle',     value: 'March 26 (135)', fullValue: null, warn: true, badge: true, calendarIcon: true, suffix: '+30 days' },
   { label: 'Status',    value: 'Active',        fullValue: null, statusDot: true, badge: true },
   { label: null,        value: 'Operational',   fullValue: null, badge: true },
   { label: 'Plan',      value: 'RH+',           fullValue: null },

@@ -8,9 +8,9 @@ export default function DataDrawer({ open, onToggle }) {
   return (
     <aside
       className={cn(
-        'flex flex-col shrink-0 bg-surface-warm border-r border-[#d8d2c7]',
+        'flex flex-col shrink-0 bg-surface-1',
         'transition-[width] duration-base overflow-hidden',
-        open ? 'w-60' : 'w-10',
+        open ? 'w-[300px]' : 'w-10',
       )}
     >
       {/* Toggle button */}

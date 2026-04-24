@@ -1,11 +1,5 @@
-import Admins from '@/modules/admins/Admins'
-import Employees from '@/modules/employees/Employees'
+import PeopleModule from '@/modules/people/People'
 
 export default function People() {
-  return (
-    <>
-      <Admins />
-      <Employees />
-    </>
-  )
+  return <PeopleModule />
 }
