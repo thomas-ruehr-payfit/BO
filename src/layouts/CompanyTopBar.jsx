@@ -111,8 +111,7 @@ export default function CompanyTopBar({ company }) {
       <div className="bg-surface-topbar border border-border-warm rounded-xl shrink-0">
 
         {/* Technical strip */}
-        <div className="flex items-center gap-4 px-4 py-1.5 w-fit">
-          <CopyURLChip />
+        <div className="flex items-center justify-between px-4 py-1.5">
           <a
             href="#"
             target="_blank"
@@ -122,9 +121,12 @@ export default function CompanyTopBar({ company }) {
             Billing Account
             <ExternalLink size={10} />
           </a>
-          {technicalChips.map((chip) => (
-            <TechnicalChip key={chip.label} label={chip.label} fullValue={chip.fullValue} />
-          ))}
+          <div className="flex items-center gap-4">
+            <CopyURLChip />
+            {technicalChips.map((chip) => (
+              <TechnicalChip key={chip.label} label={chip.label} fullValue={chip.fullValue} />
+            ))}
+          </div>
         </div>
 
         {/* White card */}
@@ -161,6 +163,13 @@ export default function CompanyTopBar({ company }) {
             </div>
           </div>
 
+          {/* Badges: Cycle + Status — left of meta */}
+          <div className="flex items-center gap-2 px-4 border-l border-border-warm shrink-0">
+            {badgeChips.map((chip) => (
+              <TopBarChip key={chip.label} {...chip} />
+            ))}
+          </div>
+
           {/* Spacer */}
           <div className="flex-1" />
 
@@ -170,13 +179,6 @@ export default function CompanyTopBar({ company }) {
               <div key={chip.label} className={cn('flex items-center', i < metaChips.length - 1 && 'border-r border-border-warm')}>
                 <MetaCol label={chip.label} value={chip.value} />
               </div>
-            ))}
-          </div>
-
-          {/* Right badges: Cycle + Status */}
-          <div className="flex items-center gap-2 px-4 border-l border-border-warm shrink-0">
-            {badgeChips.map((chip) => (
-              <TopBarChip key={chip.label} {...chip} />
             ))}
           </div>
 

@@ -22,13 +22,16 @@ export default function CompanyLayout() {
 
   return (
     <div className="flex flex-col flex-1 min-h-0">
-      {company.id === 'smiles-inc' ? (
-        <CompanyTopBar company={company} />
-      ) : (
-        <CompanyTopBarV2 company={company} />
-      )}
+      <div className="pb-3">
+        {company.id === 'smiles-inc' ? (
+          <CompanyTopBar company={company} />
+        ) : (
+          <CompanyTopBarV2 company={company} />
+        )}
+      </div>
       <div className="flex flex-1 rounded-xl border border-border-warm shadow-sm bg-surface-1 overflow-hidden">
         <div className="flex flex-col flex-1 min-w-0 rounded-xl bg-surface-0 border border-border-warm -ml-px -mt-px -mb-px min-h-0 overflow-hidden">
+          <div className="pt-2 shrink-0" />
           <FirstLevelNav currentPage={currentPage} companyId={companyId} />
           {hasSubTabs && (
             <SubTabBar currentPage={currentPage} companyId={companyId} />

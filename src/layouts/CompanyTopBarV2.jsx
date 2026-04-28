@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
-import { ChevronDown, LogIn, ExternalLink, Check } from 'lucide-react'
+import { ChevronDown, LogIn, ExternalLink, Check, Link } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import TopBarChip from '@/components/TopBarChip'
@@ -17,6 +17,35 @@ const technicalChips = STATUS_CHIPS.filter((c) => c.technical)
 function formatMetaValue(chip) {
   if (chip.label === 'Employees') return `${chip.value} Collaborators`
   return chip.value
+}
+
+function CopyURLChip() {
+  const { hovered, setHovered, copied, handleClick } = useCopyable(window.location.href)
+  return (
+    <Tooltip open={copied ? true : undefined}>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={handleClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+        className="inline-flex items-center gap-1 text-caption text-text-secondary hover:text-text-primary transition-colors duration-fast shrink-0 whitespace-nowrap cursor-pointer"
+      >
+        <TooltipTrigger asChild>
+          <span className={cn(hovered && 'underline decoration-dashed underline-offset-2')}>
+            Company URL
+          </span>
+        </TooltipTrigger>
+        <Link size={10} />
+      </div>
+      {copied && (
+        <TooltipContent side="bottom" className="bg-black !text-white border-0 text-caption px-2 py-1">
+          Company URL copied !
+        </TooltipContent>
+      )}
+    </Tooltip>
+  )
 }
 
 function TechnicalBlock({ label, fullValue }) {
@@ -122,6 +151,7 @@ export default function CompanyTopBarV2({ company }) {
 
         {/* Row 4: Technical strip */}
         <div className="inline-flex self-start items-center gap-4 -mx-1 px-2 py-1 mt-5 mb-6 bg-surface-topbar rounded text-caption">
+          <CopyURLChip />
           <a
             href="#"
             target="_blank"

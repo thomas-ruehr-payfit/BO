@@ -155,13 +155,16 @@ export default function PeopleModule() {
               </div>
 
               {/* Copyable ID */}
-              <CopyableId uid={person.uid} full />
+              <span onClick={(e) => e.stopPropagation()}>
+                <CopyableId uid={person.uid} full />
+              </span>
 
               {/* Sign in as */}
               <Button
                 size="sm"
                 variant="ghost"
                 className="gap-1.5 text-caption text-text-secondary hover:text-text-primary hover:bg-surface-1 h-7 px-2 shrink-0"
+                onClick={(e) => e.stopPropagation()}
               >
                 <LogIn size={12} />
                 Sign in as

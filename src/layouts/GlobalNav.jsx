@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import {
   Building2, FileText, FolderOpen, CreditCard,
-  Clock, Settings, User, Users, FlaskConical,
+  Clock, Settings, User, Users,
   PanelLeft, Search,
 } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
@@ -10,7 +10,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { cn } from '@/lib/utils'
 import { COMPANIES } from '@/lib/data'
 
-const ICON_MAP = { Building2, FileText, FolderOpen, CreditCard, Clock, Settings, User, Users, FlaskConical }
+const ICON_MAP = { Building2, FileText, FolderOpen, CreditCard, Clock, Settings, User, Users }
 
 const TOP = [
   { id: 'companies', label: 'Companies', icon: 'Building2', path: '/companies' },
@@ -24,10 +24,9 @@ const MIDDLE = [
 ]
 
 const BOTTOM = [
-  { id: 'users',    label: 'Users',    icon: 'Users',        path: '/users' },
-  { id: 'settings', label: 'Settings', icon: 'Settings',     path: '/settings' },
-  { id: 'account',  label: 'Account',  icon: 'User',         path: '/account' },
-  { id: 'test',     label: 'TEST',     icon: 'FlaskConical', path: '/test' },
+  { id: 'users',    label: 'Users',    icon: 'Users',    path: '/users' },
+  { id: 'settings', label: 'Settings', icon: 'Settings', path: '/settings' },
+  { id: 'account',  label: 'Account',  icon: 'User',     path: '/account' },
 ]
 
 function activeSpace(pathname) {
@@ -39,7 +38,6 @@ function activeSpace(pathname) {
   if (pathname.startsWith('/settings'))     return 'settings'
   if (pathname.startsWith('/users'))        return 'users'
   if (pathname.startsWith('/account'))      return 'account'
-  if (pathname.startsWith('/test'))         return 'test'
   return null
 }
 
@@ -190,7 +188,7 @@ export default function GlobalNav() {
     <TooltipProvider delayDuration={300}>
     <nav
       className={cn(
-        'flex flex-col shrink-0 bg-surface-0 sticky top-0 h-screen',
+        'flex flex-col shrink-0 bg-surface-0 border-r border-border sticky top-0 h-screen',
         'transition-[width] duration-base overflow-hidden',
         expanded ? 'w-44' : 'w-12',
       )}
