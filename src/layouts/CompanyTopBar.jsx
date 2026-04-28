@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
-import { ChevronDown, LogIn, ExternalLink, Check, TriangleAlert } from 'lucide-react'
+import { ChevronDown, LogIn, ExternalLink, Check, TriangleAlert, Link } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import TopBarChip from '@/components/TopBarChip'
+import CountryFlag from '@/components/CountryFlag'
 import { cn } from '@/lib/utils'
 import { useCopyable } from '@/hooks/useCopyable'
 import { COMPANIES, ORG_NAME, STATUS_CHIPS } from '@/lib/data'
@@ -37,6 +38,35 @@ function TechnicalChip({ label, fullValue }) {
       {copied && (
         <TooltipContent side="bottom" className="bg-black !text-white border-0 text-caption px-2 py-1">
           Copied !
+        </TooltipContent>
+      )}
+    </Tooltip>
+  )
+}
+
+function CopyURLChip() {
+  const { hovered, setHovered, copied, handleClick } = useCopyable(window.location.href)
+  return (
+    <Tooltip open={copied ? true : undefined}>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={handleClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+        className="inline-flex items-center gap-1 text-caption text-text-secondary hover:text-text-primary transition-colors duration-fast shrink-0 whitespace-nowrap cursor-pointer"
+      >
+        <TooltipTrigger asChild>
+          <span className={cn(hovered && 'underline decoration-dashed underline-offset-2')}>
+            Company URL
+          </span>
+        </TooltipTrigger>
+        <Link size={10} />
+      </div>
+      {copied && (
+        <TooltipContent side="bottom" className="bg-black !text-white border-0 text-caption px-2 py-1">
+          Company URL copied !
         </TooltipContent>
       )}
     </Tooltip>
@@ -82,6 +112,7 @@ export default function CompanyTopBar({ company }) {
 
         {/* Technical strip */}
         <div className="flex items-center gap-4 px-4 py-1.5 w-fit">
+          <CopyURLChip />
           <a
             href="#"
             target="_blank"
@@ -124,7 +155,10 @@ export default function CompanyTopBar({ company }) {
             </button>
 
             {/* Company name — static */}
-            <span className="text-h2 text-text-primary">{company.name}</span>
+            <div className="flex items-center gap-2">
+              <CountryFlag code={company.country} size="md" />
+              <span className="text-h2 text-text-primary">{company.name}</span>
+            </div>
           </div>
 
           {/* Spacer */}
@@ -175,6 +209,7 @@ export default function CompanyTopBar({ company }) {
                       'hover:bg-surface-1 transition-colors duration-fast text-left',
                     )}
                   >
+                    <CountryFlag code={c.country} size="sm" />
                     <div className="flex flex-col flex-1 min-w-0">
                       <span className={cn(
                         'text-body-sm',

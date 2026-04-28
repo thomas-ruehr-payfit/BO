@@ -6,6 +6,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
+import CountryFlag from '@/components/CountryFlag'
 import { ORGANISATIONS } from '@/lib/data'
 
 // January 2015 = 1, April 2026 = 136
@@ -224,7 +225,8 @@ export default function CompanyList() {
                         onClick={() => navigate(`/companies/${company.id}`)}
                         className="group flex items-center w-full px-5 py-3.5 hover:bg-surface-1 transition-colors duration-fast text-left"
                       >
-                        {/* Left: SIRET + name */}
+                        {/* Left: flag + SIRET + name */}
+                        <CountryFlag code={company.country} size="sm" className="mr-3" />
                         <div className="flex-1 min-w-0 flex flex-col gap-0.5">
                           <Siret siret={company.siret} />
                           <span className="text-h3 text-text-primary leading-snug">{company.name}</span>

@@ -1,22 +1,132 @@
 // Mock data from BO-currentspecs.md
 
+export const CURRENT_PAYROLL_CYCLE = 'April 2026'
+
 // --- People ---
 // portals: ('admin' | 'manager' | 'accountant' | 'collaborator')[]
 // contract: 'CDI' | 'CDD' | null
 // status: 'active' | 'invited' | 'disabled'
 export const PEOPLE = [
-  { id: 'p1',  name: 'Claire Fontaine',  email: 'claire.fontaine@smiles.inc',  uid: 'cf100001-ab2d-4e30-8765-100010001001', portals: ['admin', 'collaborator'],               contract: 'CDI', status: 'active'   },
-  { id: 'p2',  name: 'Nicolas Aubert',   email: 'nicolas.aubert@smiles.inc',   uid: 'ab200002-bc3e-4f41-8766-200020002002', portals: ['admin'],                               contract: null,  status: 'active'   },
-  { id: 'p3',  name: 'Isabelle Renaud',  email: 'isabelle.renaud@smiles.inc',  uid: 'cd300003-def0-4e52-8767-300030003003', portals: ['admin', 'accountant', 'collaborator'], contract: 'CDI', status: 'active'   },
-  { id: 'p4',  name: 'Marc Tissier',     email: 'marc.tissier@smiles.inc',     uid: 'ef400004-fa01-4b63-8768-400040004004', portals: ['admin', 'manager'],                    contract: null,  status: 'invited'  },
-  { id: 'p5',  name: 'Lucie Garnier',    email: 'lucie.garnier@smiles.inc',    uid: 'be500005-ec12-4974-8769-500050005005', portals: ['accountant', 'collaborator'],           contract: 'CDI', status: 'disabled' },
-  { id: 'p6',  name: 'Alice Martin',     email: 'alice.martin@smiles.inc',     uid: 'a1b2c3d4-e5f6-4890-ab12-ef1234567890', portals: ['manager', 'collaborator'],             contract: 'CDI', status: 'active'   },
-  { id: 'p7',  name: 'Thomas Bernard',   email: 'thomas.bernard@smiles.inc',   uid: 'b2c3d4e5-f670-4012-bc23-f12345678901', portals: ['collaborator'],                        contract: 'CDI', status: 'active'   },
-  { id: 'p8',  name: 'Sophie Leclerc',   email: 'sophie.leclerc@smiles.inc',   uid: 'c3d4e5f6-7890-4234-cd34-123456789012', portals: ['collaborator'],                        contract: 'CDD', status: 'active'   },
-  { id: 'p9',  name: 'Julien Morel',     email: 'julien.morel@smiles.inc',     uid: 'd4e5f678-9012-4456-de45-234567890123', portals: ['collaborator'],                        contract: 'CDI', status: 'active'   },
-  { id: 'p10', name: 'Emma Petit',       email: 'emma.petit@smiles.inc',       uid: 'e5f67890-1234-4678-ef56-345678901234', portals: ['collaborator'],                        contract: 'CDD', status: 'disabled' },
-  { id: 'p11', name: 'Romain Dubois',    email: 'romain.dubois@smiles.inc',    uid: 'f6789012-3456-4890-fa67-456789012345', portals: ['collaborator'],                        contract: 'CDI', status: 'active'   },
-  { id: 'p12', name: 'Camille Rousseau', email: 'camille.rousseau@smiles.inc', uid: '78901234-5678-4012-ab78-567890123456', portals: ['collaborator'],                        contract: 'CDI', status: 'disabled' },
+  {
+    id: 'p1', name: 'Claire Fontaine', email: 'claire.fontaine@smiles.inc',
+    uid: 'cf100001-ab2d-4e30-8765-100010001001', portals: ['admin', 'collaborator'], contract: 'CDI', status: 'active',
+    gender: 'Female', dob: '14/03/1985', nationality: 'French', ssn: '285037512345678', address: '12 Rue de la Paix, 75001 Paris',
+    jobTitle: 'Head of Operations', department: 'Operations', startDate: '01/09/2018', endDate: null, salary: '5 800 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '2.5 jours' }, { label: 'RTT', value: '1 jour' }, { label: 'Maladie', value: '—' }],
+      bonuses:  [{ label: 'Prime performance', value: '800 €' }],
+    },
+  },
+  {
+    id: 'p2', name: 'Nicolas Aubert', email: 'nicolas.aubert@smiles.inc',
+    uid: 'ab200002-bc3e-4f41-8766-200020002002', portals: ['admin'], contract: null, status: 'active',
+    gender: 'Male', dob: '22/07/1979', nationality: 'French', ssn: '179075598765432', address: '8 Avenue Montaigne, 75008 Paris',
+    jobTitle: 'CEO', department: 'Executive', startDate: '15/01/2015', endDate: null, salary: '9 200 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '—' }, { label: 'RTT', value: '—' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p3', name: 'Isabelle Renaud', email: 'isabelle.renaud@smiles.inc',
+    uid: 'cd300003-def0-4e52-8767-300030003003', portals: ['admin', 'accountant', 'collaborator'], contract: 'CDI', status: 'active',
+    gender: 'Female', dob: '05/11/1988', nationality: 'French', ssn: '288115534561234', address: '3 Rue du Faubourg Saint-Antoine, 75011 Paris',
+    jobTitle: 'Finance Director', department: 'Finance', startDate: '03/03/2020', endDate: null, salary: '6 400 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '1 jour' }, { label: 'RTT', value: '0.5 jour' }, { label: 'Maladie', value: '—' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p4', name: 'Marc Tissier', email: 'marc.tissier@smiles.inc',
+    uid: 'ef400004-fa01-4b63-8768-400040004004', portals: ['admin', 'manager'], contract: null, status: 'invited',
+    gender: 'Male', dob: '30/06/1983', nationality: 'Belgian', ssn: null, address: '17 Boulevard Haussmann, 75009 Paris',
+    jobTitle: 'VP Engineering', department: 'Engineering', startDate: null, endDate: null, salary: '7 500 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '—' }, { label: 'RTT', value: '—' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p5', name: 'Lucie Garnier', email: 'lucie.garnier@smiles.inc',
+    uid: 'be500005-ec12-4974-8769-500050005005', portals: ['accountant', 'collaborator'], contract: 'CDI', status: 'disabled',
+    gender: 'Female', dob: '18/02/1991', nationality: 'French', ssn: '291025587654321', address: '25 Rue Oberkampf, 75011 Paris',
+    jobTitle: 'Accountant', department: 'Finance', startDate: '10/06/2019', endDate: null, salary: '3 900 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '3 jours' }, { label: 'RTT', value: '—' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p6', name: 'Alice Martin', email: 'alice.martin@smiles.inc',
+    uid: 'a1b2c3d4-e5f6-4890-ab12-ef1234567890', portals: ['manager', 'collaborator'], contract: 'CDI', status: 'active',
+    gender: 'Female', dob: '09/09/1990', nationality: 'French', ssn: '290095521098765', address: '6 Rue de Rivoli, 75004 Paris',
+    jobTitle: 'Product Manager', department: 'Product', startDate: '02/01/2021', endDate: null, salary: '4 700 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '1.5 jours' }, { label: 'RTT', value: '1 jour' }, { label: 'Maladie', value: '—' }],
+      bonuses:  [{ label: 'Prime objectifs', value: '600 €' }],
+    },
+  },
+  {
+    id: 'p7', name: 'Thomas Bernard', email: 'thomas.bernard@smiles.inc',
+    uid: 'b2c3d4e5-f670-4012-bc23-f12345678901', portals: ['collaborator'], contract: 'CDI', status: 'active',
+    gender: 'Male', dob: '14/12/1993', nationality: 'French', ssn: '193125567890123', address: '42 Rue de la Roquette, 75011 Paris',
+    jobTitle: 'Software Engineer', department: 'Engineering', startDate: '15/09/2022', endDate: null, salary: '4 200 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '2 jours' }, { label: 'RTT', value: '—' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p8', name: 'Sophie Leclerc', email: 'sophie.leclerc@smiles.inc',
+    uid: 'c3d4e5f6-7890-4234-cd34-123456789012', portals: ['collaborator'], contract: 'CDD', status: 'active',
+    gender: 'Female', dob: '27/04/1996', nationality: 'French', ssn: '296045512345098', address: '11 Rue Beaubourg, 75003 Paris',
+    jobTitle: 'Marketing Intern', department: 'Marketing', startDate: '01/01/2026', endDate: '30/06/2026', salary: '2 200 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '1 jour' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p9', name: 'Julien Morel', email: 'julien.morel@smiles.inc',
+    uid: 'd4e5f678-9012-4456-de45-234567890123', portals: ['collaborator'], contract: 'CDI', status: 'active',
+    gender: 'Male', dob: '03/08/1987', nationality: 'French', ssn: '187085523456789', address: '19 Rue des Martyrs, 75009 Paris',
+    jobTitle: 'Customer Success', department: 'Operations', startDate: '14/04/2020', endDate: null, salary: '3 600 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '—' }, { label: 'RTT', value: '2 jours' }],
+      bonuses:  [{ label: 'Astreinte', value: '200 €' }],
+    },
+  },
+  {
+    id: 'p10', name: 'Emma Petit', email: 'emma.petit@smiles.inc',
+    uid: 'e5f67890-1234-4678-ef56-345678901234', portals: ['collaborator'], contract: 'CDD', status: 'disabled',
+    gender: 'Female', dob: '11/01/1998', nationality: 'French', ssn: '298015534512345', address: '7 Rue Lepic, 75018 Paris',
+    jobTitle: 'Design Intern', department: 'Product', startDate: '01/06/2025', endDate: '30/11/2025', salary: '2 000 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '2 jours' }],
+      bonuses:  [],
+    },
+  },
+  {
+    id: 'p11', name: 'Romain Dubois', email: 'romain.dubois@smiles.inc',
+    uid: 'f6789012-3456-4890-fa67-456789012345', portals: ['collaborator'], contract: 'CDI', status: 'active',
+    gender: 'Male', dob: '25/05/1989', nationality: 'French', ssn: '189055598765012', address: '33 Avenue de la République, 75011 Paris',
+    jobTitle: 'Sales Manager', department: 'Sales', startDate: '07/02/2023', endDate: null, salary: '4 100 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '1 jour' }, { label: 'RTT', value: '—' }],
+      bonuses:  [{ label: 'Commission', value: '1 200 €' }],
+    },
+  },
+  {
+    id: 'p12', name: 'Camille Rousseau', email: 'camille.rousseau@smiles.inc',
+    uid: '78901234-5678-4012-ab78-567890123456', portals: ['collaborator'], contract: 'CDI', status: 'disabled',
+    gender: 'Female', dob: '16/10/1992', nationality: 'French', ssn: '292105587651234', address: '2 Rue de la Fontaine au Roi, 75011 Paris',
+    jobTitle: 'HR Generalist', department: 'HR', startDate: '20/11/2021', endDate: null, salary: '3 800 €',
+    payrollImpactors: {
+      absences: [{ label: 'Congés payés', value: '2 jours' }, { label: 'RTT', value: '1 jour' }],
+      bonuses:  [],
+    },
+  },
 ]
 
 // Headcount chart — 24 months, Apr 2024 → Mar 2026
@@ -241,9 +351,9 @@ export const TIMELINE_TYPES = ['All types', 'non-regression', 'sign-in', 'correc
 export const ORG_NAME = 'Faces org'
 
 export const COMPANIES = [
-  { id: 'smiles-inc',          name: 'Smiles.Inc',          siret: '45785745673245', status: 'active',   plan: 'RH+', employees: 7  },
-  { id: 'smiles-operations',   name: 'Smiles Operations',   siret: '45785745600012', status: 'active',   plan: 'RH',  employees: 12 },
-  { id: 'smiles-technologies', name: 'Smiles Technologies', siret: '45785745600089', status: 'inactive', plan: 'RH+', employees: 3  },
+  { id: 'smiles-inc',          name: 'Smiles.Inc',          siret: '45785745673245', status: 'active',   plan: 'RH+', employees: 7,  country: 'FR' },
+  { id: 'smiles-operations',   name: 'Smiles Operations',   siret: '45785745600012', status: 'active',   plan: 'RH',  employees: 12, country: 'FR' },
+  { id: 'smiles-technologies', name: 'Smiles Technologies', siret: '45785745600089', status: 'inactive', plan: 'RH+', employees: 3,  country: 'FR' },
 ]
 
 // cycle: { absMonth, daysLate }
@@ -254,29 +364,29 @@ export const ORGANISATIONS = [
     id: 'faces-group',
     name: 'Faces Group',
     companies: [
-      { id: 'smiles-inc',          name: 'Smiles.Inc',          siret: '45785745673245', status: 'active',   employees: 7,  cycle: { absMonth: 135, daysLate: 30  } },
-      { id: 'smiles-operations',   name: 'Smiles Operations',   siret: '45785745600012', status: 'active',   employees: 12, cycle: { absMonth: 136, daysLate: null } },
-      { id: 'smiles-technologies', name: 'Smiles Technologies', siret: '45785745600089', status: 'inactive', employees: 3,  cycle: { absMonth: 136, daysLate: null } },
-      { id: 'smiles-studios',      name: 'Smiles Studios',      siret: '45785745600156', status: 'active',   employees: 5,  cycle: { absMonth: 136, daysLate: null } },
+      { id: 'smiles-inc',          name: 'Smiles.Inc',          siret: '45785745673245', status: 'active',   employees: 7,  cycle: { absMonth: 135, daysLate: 30  }, country: 'FR' },
+      { id: 'smiles-operations',   name: 'Smiles Operations',   siret: '45785745600012', status: 'active',   employees: 12, cycle: { absMonth: 136, daysLate: null }, country: 'FR' },
+      { id: 'smiles-technologies', name: 'Smiles Technologies', siret: '45785745600089', status: 'inactive', employees: 3,  cycle: { absMonth: 136, daysLate: null }, country: 'FR' },
+      { id: 'smiles-studios',      name: 'Smiles Studios',      siret: '45785745600156', status: 'active',   employees: 5,  cycle: { absMonth: 136, daysLate: null }, country: 'FR' },
     ],
   },
   {
     id: 'vertigo',
     name: 'Vertigo',
     companies: [
-      { id: 'vertigo-paris', name: 'Vertigo Paris', siret: '72394856100021', status: 'active', employees: 24, cycle: { absMonth: 136, daysLate: null } },
-      { id: 'vertigo-lyon',  name: 'Vertigo Lyon',  siret: '72394856100048', status: 'active', employees: 8,  cycle: { absMonth: 135, daysLate: 15   } },
+      { id: 'vertigo-paris', name: 'Vertigo Paris', siret: '72394856100021', status: 'active', employees: 24, cycle: { absMonth: 136, daysLate: null }, country: 'FR' },
+      { id: 'vertigo-lyon',  name: 'Vertigo Lyon',  siret: '72394856100048', status: 'active', employees: 8,  cycle: { absMonth: 135, daysLate: 15   }, country: 'FR' },
     ],
   },
   {
     id: 'northstar',
     name: 'Northstar',
     companies: [
-      { id: 'northstar-sas',        name: 'Northstar SAS',        siret: '89123456700041', status: 'active',   employees: 31, cycle: { absMonth: 136, daysLate: null } },
-      { id: 'northstar-holding',    name: 'Northstar Holding',    siret: '89123456700058', status: 'inactive', employees: 1,  cycle: { absMonth: 133, daysLate: 75   } },
-      { id: 'northstar-digital',    name: 'Northstar Digital',    siret: '89123456700065', status: 'active',   employees: 15, cycle: { absMonth: 136, daysLate: null } },
-      { id: 'northstar-events',     name: 'Northstar Events',     siret: '89123456700072', status: 'active',   employees: 6,  cycle: { absMonth: 136, daysLate: null } },
-      { id: 'northstar-consulting', name: 'Northstar Consulting', siret: '89123456700089', status: 'active',   employees: 9,  cycle: { absMonth: 134, daysLate: 20   } },
+      { id: 'northstar-sas',        name: 'Northstar SAS',        siret: '89123456700041', status: 'active',   employees: 31, cycle: { absMonth: 136, daysLate: null }, country: 'FR' },
+      { id: 'northstar-holding',    name: 'Northstar Holding',    siret: '89123456700058', status: 'inactive', employees: 1,  cycle: { absMonth: 133, daysLate: 75   }, country: 'GB' },
+      { id: 'northstar-digital',    name: 'Northstar Digital',    siret: '89123456700065', status: 'active',   employees: 15, cycle: { absMonth: 136, daysLate: null }, country: 'FR' },
+      { id: 'northstar-events',     name: 'Northstar Events',     siret: '89123456700072', status: 'active',   employees: 6,  cycle: { absMonth: 136, daysLate: null }, country: 'DE' },
+      { id: 'northstar-consulting', name: 'Northstar Consulting', siret: '89123456700089', status: 'active',   employees: 9,  cycle: { absMonth: 134, daysLate: 20   }, country: 'FR' },
     ],
   },
 ]

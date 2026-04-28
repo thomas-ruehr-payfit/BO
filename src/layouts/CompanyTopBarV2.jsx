@@ -5,6 +5,7 @@ import { ChevronDown, LogIn, ExternalLink, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import TopBarChip from '@/components/TopBarChip'
+import CountryFlag from '@/components/CountryFlag'
 import { cn } from '@/lib/utils'
 import { useCopyable } from '@/hooks/useCopyable'
 import { COMPANIES, ORG_NAME, STATUS_CHIPS } from '@/lib/data'
@@ -94,6 +95,7 @@ export default function CompanyTopBarV2({ company }) {
 
         {/* Row 2: Company name + badges + Login */}
         <div className="flex items-center gap-3 mt-2">
+          <CountryFlag code={company.country} size="md" />
           <span className="text-h2 text-text-primary">{company.name}</span>
           <div className="flex items-center gap-2 shrink-0">
             {badgeChips.map((chip) => (
@@ -155,6 +157,7 @@ export default function CompanyTopBarV2({ company }) {
                     'hover:bg-surface-1 transition-colors duration-fast text-left',
                   )}
                 >
+                  <CountryFlag code={c.country} size="sm" />
                   <div className="flex flex-col flex-1 min-w-0">
                     <span className={cn(
                       'text-body-sm',

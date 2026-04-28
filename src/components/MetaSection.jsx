@@ -33,7 +33,8 @@ export default function MetaSection({ title, badge, defaultOpen = false, rows = 
               <span
                 className={cn(
                   'text-label px-1.5 py-0.5 rounded',
-                  badge.variant === 'active' && 'bg-status-active/10 text-status-active',
+                  badge.variant === 'active'  && 'bg-status-active/10 text-status-active',
+                  badge.variant === 'neutral' && 'bg-surface-3 text-text-primary',
                 )}
               >
                 {badge.label}

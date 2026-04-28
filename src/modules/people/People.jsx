@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { LogIn } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { TooltipProvider } from '@/components/ui/tooltip'
@@ -5,6 +6,7 @@ import { cn } from '@/lib/utils'
 import ModuleHeader from '@/components/ModuleHeader'
 import Pill from '@/components/Pill'
 import CopyableId from '@/components/CopyableId'
+import PersonDrawer from '@/components/PersonDrawer'
 import { PEOPLE, HEADCOUNT } from '@/lib/data'
 
 const PORTAL_RANK = { admin: 1, manager: 2, accountant: 3, collaborator: 4 }
@@ -100,6 +102,7 @@ function HeadcountChart({ data }) {
 
 export default function PeopleModule() {
   const active = PEOPLE.filter((p) => p.status === 'active').length
+  const [selectedPerson, setSelectedPerson] = useState(null)
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -119,7 +122,11 @@ export default function PeopleModule() {
         {/* People list */}
         <div className="rounded-xl border border-border-warm bg-surface-0 divide-y divide-border-warm overflow-hidden">
           {SORTED_PEOPLE.map((person) => (
-            <div key={person.id} className="flex items-center gap-3 px-4 py-3">
+            <div
+              key={person.id}
+              className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-surface-1 transition-colors duration-fast"
+              onClick={() => setSelectedPerson(person)}
+            >
 
               {/* Identity */}
               <div className="flex flex-col gap-0.5 min-w-0 w-44 shrink-0">
@@ -163,6 +170,8 @@ export default function PeopleModule() {
           ))}
         </div>
       </section>
+
+      <PersonDrawer person={selectedPerson} onClose={() => setSelectedPerson(null)} />
     </TooltipProvider>
   )
 }
